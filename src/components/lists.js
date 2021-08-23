@@ -8,19 +8,19 @@ class Lists {
 
     fetchAndLoadLists() {
         this.adapter
-        .getLists()
-        .then(lists => {
-            lists.forEach(list => this.lists.push(list))
-        
-        })
-        .then(() => {
-            this.render()
-        })
-    }
+            .getLists()
+            .then(lists => {
+                lists.forEach(list => this.lists.push(list))
+                //console.log(this.notes)
+            })
+            .then(() => {
+                this.render()
+            })
+        }
 
     render() {
         const listsContainer = document.getElementById('lists-container')
-        listsContainer.innerHTML = "my lists go here"
-        console.log('my lists are', this.lists)
+        listsContainer.innerHTML = 'my notes here'
+        // console.log('my lists are', this.lists)
     }
 }
