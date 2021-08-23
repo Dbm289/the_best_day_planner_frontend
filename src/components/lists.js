@@ -8,6 +8,15 @@ class Lists {
 
     initBindingsAndEventListeners() {
         this.listsContainer = document.getElementById('lists-container')
+        this.newListName = document.getElementById('new-list-name')
+        this.listForm = document.getElementById('new-list-form')
+        this.listForm.addEventListener('submit', this.createList.bind(this))
+    }
+
+    createList(e) {
+        console.log(this)
+        e.preventDefault()
+        console.log(this.newListName.value)
     }
 
     fetchAndLoadLists() {
