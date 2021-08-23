@@ -19,8 +19,9 @@ class Lists {
         }
 
     render() {
+        //console.log(listsString)
         const listsContainer = document.getElementById('lists-container')
-        listsContainer.innerHTML = 'my lists go here'
+        listsContainer.innerHTML = this.lists.map(list => `<li>${list.name}</li>`).join('')
         // console.log('my lists are', this.lists)
     }
 }
