@@ -11,6 +11,13 @@ class Lists {
         this.newListName = document.getElementById('new-list-name')
         this.listForm = document.getElementById('new-list-form')
         this.listForm.addEventListener('submit', this.createList.bind(this))
+        this.listsContainer.addEventListener('dblclick', this.handleListClick.bind(this))
+    }
+
+    handleListClick(e) {
+        const li = e.target
+        li.contentEditable = true
+        li.classList.add('editable')
     }
 
     createList(e) {
