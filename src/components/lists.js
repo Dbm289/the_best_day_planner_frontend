@@ -14,9 +14,14 @@ class Lists {
     }
 
     createList(e) {
-        console.log(this)
         e.preventDefault()
-        console.log(this.newListName.value)
+        const value = this.newListName.value
+
+        this.adapter.createList(value).then(list => {
+            this.lists.push(new List(list))
+            this.newListName.value = ''
+            this.render()
+        })
     }
 
     fetchAndLoadLists() {
