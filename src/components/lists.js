@@ -7,17 +7,39 @@ class Lists {
     }
 
     initBindingsAndEventListeners() {
-        this.listsContainer = document.getElementById('lists-container')
-        this.newListName = document.getElementById('new-list-name')
-        this.listForm = document.getElementById('new-list-form')
-        this.listForm.addEventListener('submit', this.createList.bind(this))
-        this.listsContainer.addEventListener('dblclick', this.handleListClick.bind(this))
+        // debugger
+         const listsContainer = document.getElementById('lists-container')
+         // const name = document.querySelector('name')
+        //this.newListName = document.getElementById('new-list-name')
+        //debugger
+        const newListName = document.getElementById('new-list-name')
+         const listForm = document.getElementById('new-list-form')
+        listForm.addEventListener('submit', this.createList.bind(this))
+        listsContainer.addEventListener('dblclick', this.handleListClick.bind(this))
+        // name.addEventListener("blur", this.updateList.bind(this), true)
     }
 
     handleListClick(e) {
+        this.toggleList(e)
+        
+    }
+
+    toggleList(e) {
         const li = e.target
         li.contentEditable = true
+        li.focus()
         li.classList.add('editable')
+    }
+
+    updateList(e) {
+        const li = e.target
+        li.contentEditable = false
+        li.focus()
+        li.classList.remove('editable')
+        const newValue = li.innerHTML
+        const id = li.dataset.id
+        this.adapter.updateList(newValue, id)
+
     }
 
     createList(e) {
@@ -35,7 +57,7 @@ class Lists {
         this.adapter
             .getLists()
             .then(lists => {
-                lists.forEach(list => this.lists.push(new List(list)))
+                lists.sort((a, b) => a.id - b.id).forEach(list => this.lists.push(new List(list)))
                 console.log(this.lists)
             })
             .then(() => {
