@@ -17,12 +17,18 @@ class Lists {
         const listForm = document.getElementById('new-list-form')
         listForm.addEventListener('submit', this.createList.bind(this))
         listsContainer.addEventListener('dblclick', this.handleListClick.bind(this))
+
         //names.addEventListener("blur", this.updateList.bind(this), true)
     }
 
     handleListClick(e) {
         this.toggleList(e)
         
+    }
+
+    handleDeleteButtonClick(e) {
+        e.preventDefault();
+        this.deleteList(e)
     }
 
     toggleList(e) {
@@ -56,6 +62,14 @@ class Lists {
         })
     }
 
+    deleteList(e) {
+        const li = e.target.parentNode
+        console.log(li)
+        const id = li.dataset.id
+        this.adapter.destroyList(id)
+        this.render()
+    }
+
     fetchAndLoadLists() {
         this.adapter
             .getLists()
@@ -76,6 +90,9 @@ class Lists {
         this.lists.forEach((list) => {
             listsContainer.appendChild(this.getListElement(list))
         })
+        const deleteButton = document.querySelectorAll('button')
+        console.log(deleteButton)
+        deleteButton.forEach((btn) => {btn.addEventListener("click", this.handleDeleteButtonClick.bind(this))})
 
         }
         //listsContainer.innerHTML = this.lists.map(list => this.getListElement(list).innerHTML).join('')
