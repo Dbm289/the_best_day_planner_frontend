@@ -28,7 +28,7 @@ class Lists {
     }
 
     handleDeleteButtonClick(e) {
-        e.preventDefault();
+        //e.preventDefault();
         this.deleteList(e)
     }
 
@@ -58,14 +58,15 @@ class Lists {
         const value = newListValue.value
         //console.log(value)
         this.adapter.createList(value).then(newList => {
-            this.lists.push(new List(newList))
+            const renderReady = new List(newList)
+            this.lists.push(renderReady)
             newListValue.value = ''
-            this.render()
         })
     }
 
     deleteList(e) {
         //debugger
+        e.stopPropagation()
         const li = e.target.parentNode
         console.log(li)
         const id = li.dataset.id
@@ -89,17 +90,19 @@ class Lists {
         }
 
     render() {
-        const listsContainer = document.getElementById('lists-container')
+        const listsContainer = document.getElementById('lists-container')            
         listsContainer.innerHTML = ""
-        this.lists.forEach((list) => {
-            listsContainer.appendChild(this.getListElement(list))
-        })
-        const deleteButton = document.querySelectorAll('button')
-        console.log(deleteButton)
-        deleteButton.forEach((btn) => {btn.addEventListener("click", this.handleDeleteButtonClick.bind(this))})
-
-        }
-        //listsContainer.innerHTML = this.lists.map(list => this.getListElement(list).innerHTML).join('')
+            this.lists.forEach((list) => {
+                listsContainer.appendChild(this.getListElement(list))
+            })
+            const deleteButton = document.querySelectorAll('button')
+            console.log(deleteButton)
+            deleteButton.forEach(btn => btn.addEventListener('click', (e) => {
+                this.handleDeleteButtonClick(e)
+                }))
+            //deleteButton.forEach((btn) => {btn.addEventListener("click", this.handleDeleteButtonClick.bind(this))})
+    
+            }
 
     getListElement(list) {
         const listElement = list.renderList()

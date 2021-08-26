@@ -27,6 +27,7 @@ class ListsAdapter {
 
 
 updateList(value, id) {
+    //debugger
     const list = {
         name: value,
     }
@@ -37,7 +38,7 @@ updateList(value, id) {
             'Content-Type': 'application/json',
             'Accept': "application/json"
         },
-        body: JSON.stringify({ list }),
+        body: JSON.stringify( list ),
     }).then(res => res.json())
 }
 
