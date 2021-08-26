@@ -3,32 +3,21 @@ class Lists {
         this.lists = []
         this.adapter = new ListsAdapter()
         this.fetchAndLoadLists()
-        this.initBindingsAndEventListeners()
+        //this.initBindingsAndEventListeners()
+        
     }
-
-    fetchAndLoadLists() {
-        this.adapter
-            .getLists()
-            .then(lists => {
-                lists.sort((a, b) => a.id - b.id).forEach(list => this.lists.push(new List(list)))
-                console.log(this.lists)
-            })
-            .then(() => {
-                this.render()
-            })
-        }
 
     initBindingsAndEventListeners() {
         // debugger
         const listsContainer = document.getElementById('lists-container')
-        const name = document.querySelector('name')
+        const names = document.querySelectorAll('li')        
         //this.newListName = document.getElementById('new-list-name')
         //debugger
         const newListName = document.getElementById('new-list-name')
         const listForm = document.getElementById('new-list-form')
         listForm.addEventListener('submit', this.createList.bind(this))
         listsContainer.addEventListener('dblclick', this.handleListClick.bind(this))
-        name.addEventListener("blur", this.updateList.bind(this), true)
+        //names.addEventListener("blur", this.updateList.bind(this), true)
     }
 
     handleListClick(e) {
@@ -46,7 +35,6 @@ class Lists {
     updateList(e) {
         const li = e.target
         li.contentEditable = false
-        li.focus()
         li.classList.remove('editable')
         const newValue = li.innerHTML
         const id = li.dataset.id
@@ -56,19 +44,54 @@ class Lists {
 
     createList(e) {
         e.preventDefault()
-        const value = this.newListName.value
-
-        this.adapter.createList(value).then(list => {
-            this.lists.push(new List(list))
-            this.newListName.value = ''
+        //console.log(e)
+        const newListValue = document.getElementById("new-list-name")
+        //console.log(newListValue.value)
+        const value = newListValue.value
+        //console.log(value)
+        this.adapter.createList(value).then(newList => {
+            this.lists.push(new List(newList))
+            newListValue.value = ''
             this.render()
         })
     }
 
+    fetchAndLoadLists() {
+        this.adapter
+            .getLists()
+            .then(lists => {
+                lists.sort((a, b) => a.id - b.id).forEach(list => this.lists.push(new List(list)))
+            })
+            .then(() => {
+                this.render()
+            })
+            .then(() => {
+                this.initBindingsAndEventListeners()
+            })
+        }
+
     render() {
-        //console.log(listsString)
         const listsContainer = document.getElementById('lists-container')
-        listsContainer.innerHTML = this.lists.map(list => list.renderList()).join('')
-        // console.log('my lists are', this.lists)
+        listsContainer.innerHTML = ""
+        this.lists.forEach((list) => {
+            listsContainer.appendChild(this.getListElement(list))
+        })
+
+        }
+        //listsContainer.innerHTML = this.lists.map(list => this.getListElement(list).innerHTML).join('')
+
+    getListElement(list) {
+        const listElement = list.renderList()
+        listElement.addEventListener("blur", this.updateList.bind(this), true)
+        return listElement
     }
 }
+
+//create function to render one list item at a time
+//add event listener to each rendered object
+
+//create lists for each item
+//create li
+//give that li's innter text the item name
+//attach event listener to the li
+//append li to UL
