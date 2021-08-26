@@ -15,6 +15,7 @@ class Lists {
         //debugger
         const newListName = document.getElementById('new-list-name')
         const listForm = document.getElementById('new-list-form')
+        //debugger
         listForm.addEventListener('submit', this.createList.bind(this))
         listsContainer.addEventListener('dblclick', this.handleListClick.bind(this))
 
@@ -39,11 +40,12 @@ class Lists {
     }
 
     updateList(e) {
+        //debugger
         const li = e.target
         li.contentEditable = false
         li.classList.remove('editable')
         const newValue = li.innerHTML
-        const id = li.dataset.id
+        const id = li.parentNode.dataset.id
         this.adapter.updateList(newValue, id)
 
     }
@@ -63,11 +65,13 @@ class Lists {
     }
 
     deleteList(e) {
+        //debugger
         const li = e.target.parentNode
         console.log(li)
         const id = li.dataset.id
         this.adapter.destroyList(id)
-        this.render()
+        li.remove()
+        //this.render()
     }
 
     fetchAndLoadLists() {

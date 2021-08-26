@@ -6,13 +6,15 @@ class List {
 
     renderList() {
         //console.log(this)
+        const lineDiv = document.createElement("div")
         const output = document.createElement("li")
         const btn = document.createElement("button")
         btn.innerHTML = "X";
         output.innerHTML = (this.name)
-        output.appendChild(btn)
-        output.setAttribute('data-id', this.id)
-        return output
+        lineDiv.appendChild(btn)        
+        lineDiv.appendChild(output)
+        lineDiv.setAttribute('data-id', this.id)
+        return lineDiv
         //`<li data-id=${this.id}>${this.name}</li>`
     }
 

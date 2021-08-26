@@ -12,14 +12,27 @@
     <body>
         <div class="container">
             <h1>The Best Day Planner</h1>
+            <div id="new-list-container">
             <form id="new-list-form">
-                <input type="text" />
-                <input type="submit" />
+                <input type="text" name="list-name" id="new-list-name">
+                <input type="submit" value="Create list">
 
             </form>
-            <div id="lists-container"></div>
+            </div>
+            <div id="lists-content">
+            <ul id="lists-container">
+
+            </ul>
+            <div id="list-show">
 
             </div>
+            </div>
+            <script src="src/components/list.js" ></script>
+            <script type="text/javascript" src="src/components/lists.js" ></script>
+            <script src="src/components/app.js" ></script>
+            <script src="src/adapters/ListsAdapters.js" ></script>
+            <script src="src/index.js"></script>
+
         </div>
     </body>
 
