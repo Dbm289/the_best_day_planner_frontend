@@ -50,7 +50,7 @@ class Events {
 
     }
 
-    fetchAndLoadLists() {
+    fetchAndLoadEvents() {
         this.adapter
             .getEvents()
             .then(events => {

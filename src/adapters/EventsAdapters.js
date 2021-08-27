@@ -8,16 +8,20 @@ class EventsAdapter {
         )
     }
 
+    //LOOK UP HOW TO ADD MULTIPLE VALUES HERE
+
     createEvent(value) {
         const event = {
             name: value,
-            detail: 
         }
     }
 
-    updateList(value, id) {
+    //SAME HERE LOOK UP HOW TO EDIT MULTIPLE VALUES
+
+    updateEvent(value, id) {
+        //debugger
         const event = {
-            name: value,
+        
         }
     
         return fetch(`${this.baseUrl}/${id}`, {
@@ -29,5 +33,4 @@ class EventsAdapter {
             body: JSON.stringify( event ),
         }).then(res => res.json())
     }
-        
 }
