@@ -10,11 +10,11 @@ class Event {
 
     renderEvent() {
         //console.log(this)
-        const eventLineDiv = document.createElement("div")
+        eventLineDiv = document.createElement("div")
         const output = document.createElement("li")
         //const btn = document.createElement("button")
         //btn.innerHTML = "X";
-        output.innerHTML = (this.name)
+        output.innerHTML = (this.name, this.detail, this.event_start, this.event_end)
         //lineDiv.appendChild(btn)        
         eventLineDiv.appendChild(output)
         eventLineDiv.setAttribute('data-id', this.id)

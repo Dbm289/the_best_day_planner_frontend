@@ -13,6 +13,8 @@ class EventsAdapter {
     createEvent(value) {
         const event = {
             name: value,
+            detail: value,
+            
         }
     }
 

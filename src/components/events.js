@@ -54,7 +54,7 @@ class Events {
         this.adapter
             .getEvents()
             .then(events => {
-                events.sort((a, b) => a.id - b.id).forEach(event => event.lists.push(new Event(event)))
+                events.sort((a, b) => a.id - b.id).forEach(event => this.events.push(new Event(event)))
             })
             .then(() => {
                 this.render()
@@ -65,7 +65,7 @@ class Events {
         }
 
     render() {
-        const eventContainer = document.getElementById('events-container')            
+        const eventsContainer = document.getElementById('events-container')            
         eventsContainer.innerHTML = ""
             this.events.forEach((list) => {
                 eventsContainer.appendChild(this.getEventElement(event))
