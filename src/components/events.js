@@ -1,15 +1,15 @@
 class Events {
-    constructor() {
-        this.events = []
+    constructor(events) {
+        this.events = events
         this.adapter = new EventsAdapter()
-        this.fetchAndLoadEvents()
+        return this.render()
         //this.initBindingsAndEventListeners()
         
     }
 
     initBindingsAndEventListeners() {
         // debugger
-        const eventsContainer = document.getElementById('events-container')
+        const eventsContainer = document.getElementById('lists-container')
         const eventInfo = document.querySelectorAll('li')        
         //this.newListName = document.getElementById('new-list-name')
         //debugger
@@ -17,13 +17,13 @@ class Events {
        // const listForm = document.getElementById('new-list-form')
         //debugger
         //listForm.addEventListener('submit', this.createList.bind(this))
-        listsContainer.addEventListener('dblclick', this.handleListClick.bind(this))
+        eventsContainer.addEventListener('dblclick', this.handleEventClick.bind(this))
 
         //names.addEventListener("blur", this.updateList.bind(this), true)
     }
 
-    handleListClick(e) {
-        this.toggleList(e)
+    handleEventClick(e) {
+        this.toggleEvent(e)
         
     }
 
@@ -32,21 +32,35 @@ class Events {
     //    this.deleteList(e)
    // }
 
-    toggleList(e) {
+    toggleEvent(e) {
         const li = e.target
         li.contentEditable = true
         li.focus()
-        li.classList.add('editable')
+        li.classEvent.add('editable')
+    }
+
+    createList(e) {
+        e.preventDefault()
+        //console.log(e)
+        const newListValue = document.getElementById("new-list-name")
+        //console.log(newListValue.value)
+        const value = newListValue.value
+        //console.log(value)
+        this.adapter.createList(value).then(newList => {
+            const renderReady = new List(newList)
+            this.lists.push(renderReady)
+            newListValue.value = ''
+        })
     }
 
     updateEvent(e) {
         //debugger
         const li = e.target
         li.contentEditable = false
-        li.classList.remove('editable')
+        li.classEvent.remove('editable')
         const newValue = li.innerHTML
         const id = li.parentNode.dataset.id
-        this.adapter.updateList(newValue, id)
+        this.adapter.updateEvent(newValue, id)
 
     }
 
@@ -65,11 +79,17 @@ class Events {
         }
 
     render() {
-        const eventsContainer = document.getElementById('events-container')            
-        eventsContainer.innerHTML = ""
-            this.events.forEach((list) => {
-                eventsContainer.appendChild(this.getEventElement(event))
-            })
+        // const eventsContainer = document.getElementById('lists-container')   
+        const eventsOutput = document.createElement('div');
+        this.events.forEach((myEvent) => {
+            console.log(myEvent);
+            eventsOutput.appendChild(new Event(myEvent))
+        })
+        return eventsOutput     
+        // eventsContainer.innerHTML = ""
+        //     this.events.forEach((list) => {
+        //         eventsContainer.appendChild(this.getEventElement(list))
+        //     })
             //const deleteButton = document.querySelectorAll('button')
             //console.log(deleteButton)
             //deleteButton.forEach(btn => btn.addEventListener('click', (e) => {
