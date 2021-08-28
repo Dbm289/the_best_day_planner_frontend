@@ -105,8 +105,7 @@ class Lists {
             }
 
     getListElement(list) {
-        const listElement = list.renderList()
-        listElement.addEventListener("blur", this.updateList.bind(this), true)
+        const listElement = list.renderList(this.updateList.bind(this))
         return listElement
     }
 }
