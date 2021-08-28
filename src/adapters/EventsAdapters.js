@@ -14,25 +14,22 @@ class EventsAdapter {
         const event = {
             name: value,
             detail: value,
-            
+
         }
     }
 
     //SAME HERE LOOK UP HOW TO EDIT MULTIPLE VALUES
 
     updateEvent(value, id) {
+        console.log(value, id)
         //debugger
-        const event = {
-        
-        }
-    
         return fetch(`${this.baseUrl}/${id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': "application/json"
             },
-            body: JSON.stringify( event ),
+            body: JSON.stringify( value ),
         }).then(res => res.json())
     }
 }

@@ -32,6 +32,10 @@ class Lists {
         this.deleteList(e)
     }
 
+    handleAddButtonClick(e) {
+        this. add list?
+    }
+
     toggleList(e) {
         const li = e.target
         li.contentEditable = true
@@ -61,6 +65,12 @@ class Lists {
             const renderReady = new List(newList)
             this.lists.push(renderReady)
             newListValue.value = ''
+        })
+        .then(() => {
+            this.render()
+        })
+        .then(() => {
+            this.initBindingsAndEventListeners()
         })
     }
 
@@ -95,10 +105,16 @@ class Lists {
             this.lists.forEach((list) => {
                 listsContainer.appendChild(this.getListElement(list))
             })
-            const deleteButton = document.querySelectorAll('button')
+            const deleteButton = document.querySelectorAll('delete-button')
             console.log(deleteButton)
             deleteButton.forEach(btn => btn.addEventListener('click', (e) => {
                 this.handleDeleteButtonClick(e)
+                }))
+            
+            const addButton = document.querySelectorAll('add-button')
+            console.log(addButton)
+            const addButton.forEach(btn => btn.addEventListener('click', (e) => {
+                this.handleAddButtonClick(e)
                 }))
             //deleteButton.forEach((btn) => {btn.addEventListener("click", this.handleDeleteButtonClick.bind(this))})
     

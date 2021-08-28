@@ -54,13 +54,25 @@ class Events {
     }
 
     updateEvent(e) {
-        //debugger
+        console.log(e);
         const li = e.target
         li.contentEditable = false
-        li.classEvent.remove('editable')
-        const newValue = li.innerHTML
+        li.classList.remove('editable')
+        //const newValue = li.innerHTML
+        //const newValueKey = li.dataset.id
+
+        const liParent = li.parentNode;
+
+        const newEventValue = {
+            name: liParent.querySelector('.name').innerHTML,
+            detail: liParent.querySelector('.detail').innerHTML,
+            ["event_start"] : liParent.querySelector('.event_start').innerHTML,
+            ["event_end"] : liParent.querySelector('.event_end').innerHTML,
+        } 
+        
+        
         const id = li.parentNode.dataset.id
-        this.adapter.updateEvent(newValue, id)
+        this.adapter.updateEvent(newEventValue, id)
 
     }
 
@@ -83,7 +95,7 @@ class Events {
         const eventsOutput = document.createElement('div');
         this.events.forEach((myEvent) => {
             console.log(myEvent);
-            eventsOutput.appendChild(new Event(myEvent))
+            eventsOutput.appendChild(new Event(myEvent, this.updateEvent.bind(this)))
         })
         return eventsOutput     
         // eventsContainer.innerHTML = ""
