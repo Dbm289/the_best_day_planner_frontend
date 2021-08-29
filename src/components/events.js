@@ -1,7 +1,8 @@
 class Events {
-    constructor(events) {
+    constructor(events, refreshCallback) {
         this.events = events
         this.adapter = new EventsAdapter()
+        this.refreshCallback = refreshCallback
         return this.render()
         //this.initBindingsAndEventListeners()
         
@@ -85,6 +86,7 @@ class Events {
         }
         this.adapter.updateEvent(newEventValue, id)
         e.target.remove();
+        this.refreshCallback()
     }
 
     fetchAndLoadEvents() {

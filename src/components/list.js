@@ -1,8 +1,9 @@
 class List {
-    constructor(listJSON) {
+    constructor(listJSON, refreshCallback) {
         this.id = listJSON.id
         this.name = listJSON.name
         this.events = listJSON.events
+        this.refreshCallback = refreshCallback
     }
 
     renderList(updateListCallback) {
@@ -14,7 +15,7 @@ class List {
         const addBtn = document.createElement("button")
         const deleteBtn = document.createElement("button")
         const eventGroup = document.createElement("div")
-        eventGroup.appendChild(new Events(this.events))
+        eventGroup.appendChild(new Events(this.events, this.refreshCallback))
         deleteBtn.innerHTML = "X";
         deleteBtn.className = "delete-button";
         addBtn.innerHTML = "Add Event";
