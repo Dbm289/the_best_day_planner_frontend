@@ -19,17 +19,25 @@ class Events {
        // const listForm = document.getElementById('new-list-form')
         //debugger
         //listForm.addEventListener('submit', this.createList.bind(this))
-        editableTextFields.forEach((element) => element.addEventListener('dblclick', this.handleEventClick.bind(this)))
-        editableDatetimeFields.forEach((element) => element.addEventListener('dblclick', this.handleEventClick.bind(this)))
-        eventsContainer.addEventListener('dblclick', this.handleEventClick.bind(this))
-        eventsContainer.addEventListener('')
+        console.log('FIELDS', editableDatetimeFields)
+        editableTextFields.forEach((element) => element.addEventListener('dblclick', this.handleTextEventClick.bind(this)))
+        editableDatetimeFields.forEach((element) => element.addEventListener('dblclick', this.handleDateEventClick.bind(this)))
+        //eventsContainer.addEventListener('dblclick', this.handleEventClick.bind(this))
+        //eventsContainer.addEventListener('')
 
         //names.addEventListener("blur", this.updateList.bind(this), true)
     }
 
-    handleEventClick(e) {
-        this.toggleEvent(e)
-        
+    handleDateEventClick(e) {
+        //console.log(e.target)
+        const li = e.target
+        const inputElement = document.createElement('input')
+        inputElement.type = "datetime-local"
+        inputElement.value = e.target.innerHTML
+
+        inputElement.addEventListener("blur", this.updateDateEvent.bind(this), true)
+
+        li.appendChild(inputElement)
     }
 
     //handleDeleteButtonClick(e) {
@@ -37,15 +45,15 @@ class Events {
     //    this.deleteList(e)
    // }
 
-    toggleEvent(e) {
+    handleTextEventClick(e) {
         const li = e.target
         li.contentEditable = true
         li.focus()
         li.classEvent.add('editable')
     }
 
-    updateEvent(e) {
-        console.log(e);
+    updateTextEvent(e) {
+        e.preventDefault()
         const li = e.target
         li.contentEditable = false
         li.classList.remove('editable')
@@ -57,14 +65,26 @@ class Events {
         const newEventValue = {
             name: liParent.querySelector('.name').innerHTML,
             detail: liParent.querySelector('.detail').innerHTML,
-            event_start : liParent.querySelector('.event_start').innerHTML,
-            event_end : liParent.querySelector('.event_end').innerHTML,
+            
         } 
         
         
         const id = li.parentNode.dataset.id
         this.adapter.updateEvent(newEventValue, id)
 
+    }
+
+    updateDateEvent(e) {
+        e.preventDefault()
+        console.log(e);
+        const newDateValue = e.target.value;
+        const newDateKey = e.target.parentNode.classList[0];
+        const id = e.target.parentNode.parentNode.dataset.id;
+        const newEventValue = {
+            [newDateKey]: newDateValue
+        }
+        this.adapter.updateEvent(newEventValue, id)
+        e.target.remove();
     }
 
     fetchAndLoadEvents() {
@@ -86,7 +106,7 @@ class Events {
         const eventsOutput = document.createElement('div');
         this.events.forEach((myEvent) => {
             console.log(myEvent);
-            eventsOutput.appendChild(new Event(myEvent, this.updateEvent.bind(this)))
+            eventsOutput.appendChild(new Event(myEvent, this.updateTextEvent.bind(this), this.updateTextEvent.bind(this), this.handleTextEventClick.bind(this), this.handleDateEventClick.bind(this)))
         })
         return eventsOutput     
         // eventsContainer.innerHTML = ""
@@ -102,9 +122,9 @@ class Events {
     
             }
 
-    getEventElement(event) {
-        const eventElement = event.renderEvent()
-        eventElement.addEventListener("blur", this.updateEvent.bind(this), true)
-        return eventElement
-    }
+    //getEventElement(event) {
+      //  const eventElement = event.renderEvent()
+        //eventElement.addEventListener("blur", this.updateEvent.bind(this), true)
+        //return eventElement
+    //}
 }

@@ -1,5 +1,5 @@
 class Event {
-    constructor(eventJSON, updateEventCallback) {
+    constructor(eventJSON, updateTextEventCallback, updateDateEventCallback, handleTextFieldCallback, handleDateFieldCallback) {
         this.id = eventJSON.id
         this.name = eventJSON.name
         this.detail = eventJSON.detail
@@ -7,9 +7,19 @@ class Event {
         this.event_start = eventJSON.event_start
         this.event_end = eventJSON.event_end
 
-        this.updateEvent = updateEventCallback
+        this.updateTextEvent = updateTextEventCallback
+        this.updateDateEvent = updateDateEventCallback
+        this.handleTextFieldClick = handleTextFieldCallback
+        this.handleDateFieldClick = handleDateFieldCallback
 
         return this.render()
+    }
+
+    handleTextEventBlur(e, value) {
+        if(e.relatedTarget?.nodeName == 'INPUT') {
+            return
+        }
+        e.target.innerHTML = new Date(value).toLocaleString();
     }
 
     render() {
@@ -23,7 +33,6 @@ class Event {
 
         const startDateObject = new Date(this.event_start)
         const endDateObject = new Date(this.event_end)
-
         console.log(eventStart, startDateObject)
 
         eventName.innerHTML = this.name
@@ -40,8 +49,21 @@ class Event {
         eventOutput.appendChild(eventStart)
         eventOutput.appendChild(eventEnd)
 
-        eventOutput.addEventListener("blur", this.updateEvent, true)
+        eventName.addEventListener("dblclick", this.handleTextFieldClick, true)
+        eventDetail.addEventListener("dblclick", this.handleTextFieldClick, true)
+        eventName.addEventListener("blur", this.updateTextEvent, true)
+        eventDetail.addEventListener("blur", this.updateTextEvent, true)
+
+
+        eventStart.addEventListener("dblclick", this.handleDateFieldClick, true)
+        eventEnd.addEventListener("dblclick", this.handleDateFieldClick, true)
+        eventStart.addEventListener("blur", (e) => this.handleTextEventBlur(e, this.event_start), true)
+        eventEnd.addEventListener("blur", (e) => this.handleTextEventBlur(e, this.event_end), true)
+
+
         return eventOutput
+
+    
 
     }
 
