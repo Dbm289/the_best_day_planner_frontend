@@ -52,4 +52,20 @@ destroyList(id) {
     })
 }
 
+createEvent(id) {
+    const event = {
+        name: "Edit event title",
+        detail: "Edit event detail",
+        list_id: id
+    }
+    return fetch('http://127.0.0.1:3000/events', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': "application/json"
+        },
+        body: JSON.stringify( event ),
+    }).then(res => res.json())
+}
+
 }

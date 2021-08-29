@@ -33,7 +33,7 @@ class Lists {
     }
 
     handleAddButtonClick(e) {
-        this. add list?
+        this.createEvent(e)
     }
 
     toggleList(e) {
@@ -74,6 +74,25 @@ class Lists {
         })
     }
 
+    createEvent(e) {
+        e.preventDefault()
+        //console.log(e)
+        const newEventValue = e.target.parentNode
+        //console.log(newListValue.value)
+        const value = newEventValue.value
+        const id = newEventValue.dataset.id
+        this.adapter.createEvent(id)
+        .then(() => {
+            this.lists = []
+        })
+        .then(() => {
+            this.fetchAndLoadLists()
+        })
+            //const renderReady = new Event(newEvent)
+            //this.events.push(renderReady)
+            //newEvent.value = ''
+    }
+
     deleteList(e) {
         //debugger
         e.stopPropagation()
@@ -81,7 +100,12 @@ class Lists {
         console.log(li)
         const id = li.dataset.id
         this.adapter.destroyList(id)
-        li.remove()
+        .then(() => {
+            this.lists = []
+        })
+        .then(() => {
+            this.fetchAndLoadLists()
+        })
         //this.render()
     }
 
@@ -105,18 +129,18 @@ class Lists {
             this.lists.forEach((list) => {
                 listsContainer.appendChild(this.getListElement(list))
             })
-            const deleteButton = document.querySelectorAll('delete-button')
+            const deleteButton = document.querySelectorAll('.delete-button')
             console.log(deleteButton)
             deleteButton.forEach(btn => btn.addEventListener('click', (e) => {
                 this.handleDeleteButtonClick(e)
                 }))
-            
-            const addButton = document.querySelectorAll('add-button')
+            //deleteButton.forEach((btn) => {btn.addEventListener("click", this.handleDeleteButtonClick.bind(this))})
+            const addButton = document.querySelectorAll('.add-button')
             console.log(addButton)
-            const addButton.forEach(btn => btn.addEventListener('click', (e) => {
+            addButton.forEach(btn => btn.addEventListener('click', (e) => {
                 this.handleAddButtonClick(e)
                 }))
-            //deleteButton.forEach((btn) => {btn.addEventListener("click", this.handleDeleteButtonClick.bind(this))})
+            return listsContainer
     
             }
 

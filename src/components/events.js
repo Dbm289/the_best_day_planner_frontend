@@ -10,6 +10,8 @@ class Events {
     initBindingsAndEventListeners() {
         // debugger
         const eventsContainer = document.getElementById('lists-container')
+        const editableTextFields = document.getElementsByClassName('editable_text')
+        const editableDatetimeFields = document.getElementsByClassName('editable_date')
         const eventInfo = document.querySelectorAll('li')        
         //this.newListName = document.getElementById('new-list-name')
         //debugger
@@ -17,7 +19,10 @@ class Events {
        // const listForm = document.getElementById('new-list-form')
         //debugger
         //listForm.addEventListener('submit', this.createList.bind(this))
+        editableTextFields.forEach((element) => element.addEventListener('dblclick', this.handleEventClick.bind(this)))
+        editableDatetimeFields.forEach((element) => element.addEventListener('dblclick', this.handleEventClick.bind(this)))
         eventsContainer.addEventListener('dblclick', this.handleEventClick.bind(this))
+        eventsContainer.addEventListener('')
 
         //names.addEventListener("blur", this.updateList.bind(this), true)
     }
@@ -39,20 +44,6 @@ class Events {
         li.classEvent.add('editable')
     }
 
-    createList(e) {
-        e.preventDefault()
-        //console.log(e)
-        const newListValue = document.getElementById("new-list-name")
-        //console.log(newListValue.value)
-        const value = newListValue.value
-        //console.log(value)
-        this.adapter.createList(value).then(newList => {
-            const renderReady = new List(newList)
-            this.lists.push(renderReady)
-            newListValue.value = ''
-        })
-    }
-
     updateEvent(e) {
         console.log(e);
         const li = e.target
@@ -66,8 +57,8 @@ class Events {
         const newEventValue = {
             name: liParent.querySelector('.name').innerHTML,
             detail: liParent.querySelector('.detail').innerHTML,
-            ["event_start"] : liParent.querySelector('.event_start').innerHTML,
-            ["event_end"] : liParent.querySelector('.event_end').innerHTML,
+            event_start : liParent.querySelector('.event_start').innerHTML,
+            event_end : liParent.querySelector('.event_end').innerHTML,
         } 
         
         

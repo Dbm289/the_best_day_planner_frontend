@@ -21,14 +21,19 @@ class Event {
         const eventStart = document.createElement("div")
         const eventEnd = document.createElement("div")
 
+        const startDateObject = new Date(this.event_start)
+        const endDateObject = new Date(this.event_end)
+
+        console.log(eventStart, startDateObject)
+
         eventName.innerHTML = this.name
         eventDetail.innerHTML = this.detail
-        eventStart.innerHTML = this.event_start
-        eventEnd.innerHTML = this.event_end
-        eventName.className = "name"
-        eventDetail.className = "detail"
-        eventStart.className = "event_start"
-        eventEnd.className = "event_end"
+        eventStart.innerHTML = startDateObject.toLocaleString()
+        eventEnd.innerHTML = endDateObject.toLocaleString()
+        eventName.className = "name editable_text"
+        eventDetail.className = "detail editable_text"
+        eventStart.className = "event_start editable_date"
+        eventEnd.className = "event_end editable_date"
         //eventOutput.appendChild = (this.name), this.detail, this.event_start, this.event_end)
         eventOutput.appendChild(eventName)
         eventOutput.appendChild(eventDetail)

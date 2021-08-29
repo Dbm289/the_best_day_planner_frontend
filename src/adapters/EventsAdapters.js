@@ -10,13 +10,7 @@ class EventsAdapter {
 
     //LOOK UP HOW TO ADD MULTIPLE VALUES HERE
 
-    createEvent(value) {
-        const event = {
-            name: value,
-            detail: value,
-
-        }
-    }
+    
 
     //SAME HERE LOOK UP HOW TO EDIT MULTIPLE VALUES
 
