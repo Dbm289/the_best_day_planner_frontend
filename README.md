@@ -8,7 +8,7 @@ Installation help: To install, fork this repo and that of the backend page. On t
 
 Installation of postgres is important to run this application!
 
-YouTube link for project deomnstration:
+YouTube link for project demonstration:
 
 Medium post regarding project:
 
