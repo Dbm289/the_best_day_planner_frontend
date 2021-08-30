@@ -10,5 +10,7 @@ Installation of postgres is important to run this application!
 
 YouTube link for project demonstration:
 
-Medium post regarding project:
+Medium post regarding project: https://danmooreteachingandlearning.medium.com/the-power-of-class-names-64bd1607aabb
+
+I want to thank my cohort lead, Ronnie Boniface, for her invaluable help in shaping my project and for her in-depth walkthroughs and videos. Cernan Bernardo's walkthrough videos were also extremely helpful in structuring my project and getting it up on its feet. My girlfriend, Eleanor, helped me a lot as well and I could not have finished this project without her looking it over and telling me I was not making any sense.
 

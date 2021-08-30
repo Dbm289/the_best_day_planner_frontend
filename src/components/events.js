@@ -29,18 +29,6 @@ class Events {
         //names.addEventListener("blur", this.updateList.bind(this), true)
     }
 
-    handleDateEventClick(e) {
-        //console.log(e.target)
-        const li = e.target
-        const inputElement = document.createElement('input')
-        inputElement.type = "datetime-local"
-        inputElement.value = e.target.innerHTML
-
-        inputElement.addEventListener("blur", this.updateDateEvent.bind(this), true)
-
-        li.appendChild(inputElement)
-    }
-
     //handleDeleteButtonClick(e) {
         //e.preventDefault();
     //    this.deleteList(e)
@@ -73,6 +61,18 @@ class Events {
         const id = li.parentNode.dataset.id
         this.adapter.updateEvent(newEventValue, id)
 
+    }
+
+    handleDateEventClick(e) {
+        //console.log(e.target)
+        const li = e.target
+        const inputElement = document.createElement('input')
+        inputElement.type = "datetime-local"
+        inputElement.value = e.target.innerHTML
+
+        inputElement.addEventListener("blur", this.updateDateEvent.bind(this), true)
+
+        li.appendChild(inputElement)
     }
 
     updateDateEvent(e) {
