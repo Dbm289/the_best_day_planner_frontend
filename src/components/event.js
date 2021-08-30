@@ -25,6 +25,7 @@ class Event {
     render() {
         const eventOutput = document.createElement("div")
         eventOutput.className = 'event-class';
+        eventOutput.classList.add('col', 's4', 'event-output');
         eventOutput.setAttribute('data-id', this.id)
         const eventName = document.createElement("div")
         const eventDetail = document.createElement("div")

@@ -1,13 +1,13 @@
 html {
     height: 100%;
     width: 100%;
-    font-family: "Titillium Web", sans-serif;
+    ont-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   }
   
   body {
     min-height: 100%;
     min-width: 100%;
-    background: linear-gradient(pink, violet);
+    background: linear-gradient(rgb(221, 216, 216), rgb(102, 69, 102));
   }
   
   button {
@@ -41,3 +41,19 @@ html {
     border-radius: 5px;
     box-shadow: 2px 5px 5px #333;
   }
+
+  .list-title {
+    background: burlywood;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 1.7rem;
+
+  }
+
+  .event-output {
+    background: burlywood;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+    margin: 1rem;
+    
+  }
+
