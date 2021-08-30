@@ -15,16 +15,16 @@ class List {
         const addBtn = document.createElement("button")
         const deleteBtn = document.createElement("button")
         const eventGroup = document.createElement("div")
-        eventGroup.appendChild(new Events(this.events, this.refreshCallback))
+        eventGroup.appendChild(new Events(this.events, this.refr))
         deleteBtn.innerHTML = "X";
         deleteBtn.className = "delete-button";
         addBtn.innerHTML = "Add Event";
         addBtn.className = "add-button";
         output.innerHTML = (this.name)
-        lineDiv.appendChild(deleteBtn)
-        lineDiv.appendChild(addBtn)        
         lineDiv.appendChild(output)
         lineDiv.appendChild(eventGroup)
+        lineDiv.appendChild(deleteBtn)
+        lineDiv.appendChild(addBtn)
         lineDiv.setAttribute('data-id', this.id)
         
         return lineDiv
