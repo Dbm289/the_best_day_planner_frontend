@@ -3,6 +3,7 @@ class Events {
         this.events = events
         this.adapter = new EventsAdapter()
         this.refreshCallback = refreshCallback
+        this.listsAdapter = new ListsAdapter()
         return this.render()
         //this.initBindingsAndEventListeners()
         
@@ -77,6 +78,7 @@ class Events {
 
     updateDateEvent(e) {
         e.preventDefault()
+        debugger
         console.log(e);
         const newDateValue = e.target.value;
         const newDateKey = e.target.parentNode.classList[0];
@@ -85,8 +87,14 @@ class Events {
             [newDateKey]: newDateValue
         }
         this.adapter.updateEvent(newEventValue, id)
+        //e.target.remove();
+        //debugger
+        //this.adapter.updateEvent(e.target.value, id)
+        //this.refreshCallback()
         e.target.remove();
-        this.refreshCallback()
+
+        // somewhere in here, put the value of e.target.parentNode in a p tag, e.target.parentNode.firstChild, set innhtml of firstChild to be the new date value
+
     }
 
     fetchAndLoadEvents() {

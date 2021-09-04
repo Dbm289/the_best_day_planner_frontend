@@ -8,15 +8,10 @@ class EventsAdapter {
         )
     }
 
-    //LOOK UP HOW TO ADD MULTIPLE VALUES HERE
-
-    
-
-    //SAME HERE LOOK UP HOW TO EDIT MULTIPLE VALUES
-
     updateEvent(value, id) {
         console.log(value, id)
-        //debugger
+        debugger
+        //grab date value in dom and render it
         return fetch(`${this.baseUrl}/${id}`, {
             method: 'PATCH',
             headers: {

@@ -15,7 +15,7 @@ class List {
         const addBtn = document.createElement("button")
         const deleteBtn = document.createElement("button")
         const eventGroup = document.createElement("div")
-        eventGroup.appendChild(new Events(this.events, this.refr))
+        eventGroup.appendChild(new Events(this.events, updateListCallback))
         deleteBtn.innerHTML = "X";
         deleteBtn.className = "delete-button";
         addBtn.innerHTML = "Add Event";

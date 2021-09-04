@@ -8,7 +8,7 @@ Installation help: To install, fork this repo and that of the backend page. On t
 
 Installation of postgres is important to run this application!
 
-YouTube link for project demonstration:
+YouTube link for project demonstration: https://www.youtube.com/watch?v=9FP5RcVQHBM
 
 Medium post regarding project: https://danmooreteachingandlearning.medium.com/the-power-of-class-names-64bd1607aabb
 
