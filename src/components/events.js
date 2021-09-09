@@ -78,14 +78,26 @@ class Events {
 
     updateDateEvent(e) {
         e.preventDefault()
-        debugger
+        //debugger
         console.log(e);
         const newDateValue = e.target.value;
+        if (newDateValue === "") {
+            console.log(newDateValue)
+            e.target.remove();
+            return
+        }
         const newDateKey = e.target.parentNode.classList[0];
         const id = e.target.parentNode.parentNode.dataset.id;
         const newEventValue = {
             [newDateKey]: newDateValue
         }
+
+        const replacementTarget = e.target.parentNode
+        const replacementValue = e.target.value
+        console.log(replacementValue)
+
+
+
         this.adapter.updateEvent(newEventValue, id)
         //e.target.remove();
         //debugger
@@ -93,7 +105,10 @@ class Events {
         //this.refreshCallback()
         e.target.remove();
 
-        // somewhere in here, put the value of e.target.parentNode in a p tag, e.target.parentNode.firstChild, set innhtml of firstChild to be the new date value
+        replacementTarget.innerHTML = new Date(replacementValue).toLocaleString()
+        console.log(e.target.value)
+
+        // somewhere in here, put the value of e.target.parentNode in a p tag, e.target.parentNode.firstChild, set innerhtml of firstChild to be the new date value
 
     }
 

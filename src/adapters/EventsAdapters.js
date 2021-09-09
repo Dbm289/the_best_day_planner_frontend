@@ -10,7 +10,7 @@ class EventsAdapter {
 
     updateEvent(value, id) {
         console.log(value, id)
-        debugger
+        //debugger
         //grab date value in dom and render it
         return fetch(`${this.baseUrl}/${id}`, {
             method: 'PATCH',
