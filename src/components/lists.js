@@ -3,23 +3,16 @@ class Lists {
         this.lists = []
         this.adapter = new ListsAdapter()
         this.fetchAndLoadLists()
-        //this.initBindingsAndEventListeners()
         
     }
 
     initBindingsAndEventListeners() {
-        // debugger
         const listsContainer = document.getElementById('lists-container')
         const names = document.querySelectorAll('li')        
-        //this.newListName = document.getElementById('new-list-name')
-        //debugger
         const newListName = document.getElementById('new-list-name')
         const listForm = document.getElementById('new-list-form')
-        //debugger
         listForm.addEventListener('submit', this.createList.bind(this))
         listsContainer.addEventListener('dblclick', this.handleListClick.bind(this))
-
-        //names.addEventListener("blur", this.updateList.bind(this), true)
     }
 
     handleListClick(e) {
@@ -28,7 +21,6 @@ class Lists {
     }
 
     handleDeleteButtonClick(e) {
-        //e.preventDefault();
         this.deleteList(e)
     }
 
@@ -44,7 +36,6 @@ class Lists {
     }
 
     updateList(e) {
-        //debugger
         const li = e.target
         li.contentEditable = false
         li.classList.remove('editable')
@@ -56,11 +47,8 @@ class Lists {
 
     createList(e) {
         e.preventDefault()
-        //console.log(e)
         const newListValue = document.getElementById("new-list-name")
-        //console.log(newListValue.value)
         const value = newListValue.value
-        //console.log(value)
         this.adapter.createList(value).then(newList => {
             const renderReady = new List(newList)
             this.lists.push(renderReady)
@@ -88,13 +76,9 @@ class Lists {
         .then(() => {
             this.fetchAndLoadLists()
         })
-            //const renderReady = new Event(newEvent)
-            //this.events.push(renderReady)
-            //newEvent.value = ''
     }
 
     deleteList(e) {
-        //debugger
         e.stopPropagation()
         const li = e.target.parentNode
         console.log(li)
@@ -106,7 +90,6 @@ class Lists {
         .then(() => {
             this.fetchAndLoadLists()
         })
-        //this.render()
     }
 
     fetchAndLoadLists() {
@@ -154,12 +137,3 @@ class Lists {
         return listElement
     }
 }
-
-//create function to render one list item at a time
-//add event listener to each rendered object
-
-//create lists for each item
-//create li
-//give that li's innter text the item name
-//attach event listener to the li
-//append li to UL

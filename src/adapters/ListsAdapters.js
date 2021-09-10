@@ -8,8 +8,6 @@ class ListsAdapter {
         )
     }
 
-    //iterate over these and render each one individually
-
     createList(value) {
         const list = {
             name: value,
@@ -27,7 +25,6 @@ class ListsAdapter {
 
 
 updateList(value, id) {
-    //debugger
     const list = {
         name: value,
     }

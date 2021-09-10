@@ -5,35 +5,18 @@ class Events {
         this.refreshCallback = refreshCallback
         this.listsAdapter = new ListsAdapter()
         return this.render()
-        //this.initBindingsAndEventListeners()
         
     }
 
     initBindingsAndEventListeners() {
-        // debugger
         const eventsContainer = document.getElementById('lists-container')
         const editableTextFields = document.getElementsByClassName('editable_text')
         const editableDatetimeFields = document.getElementsByClassName('editable_date')
         const eventInfo = document.querySelectorAll('li')        
-        //this.newListName = document.getElementById('new-list-name')
-        //debugger
-       // const newListName = document.getElementById('new-list-name')
-       // const listForm = document.getElementById('new-list-form')
-        //debugger
-        //listForm.addEventListener('submit', this.createList.bind(this))
         console.log('FIELDS', editableDatetimeFields)
         editableTextFields.forEach((element) => element.addEventListener('dblclick', this.handleTextEventClick.bind(this)))
         editableDatetimeFields.forEach((element) => element.addEventListener('dblclick', this.handleDateEventClick.bind(this)))
-        //eventsContainer.addEventListener('dblclick', this.handleEventClick.bind(this))
-        //eventsContainer.addEventListener('')
-
-        //names.addEventListener("blur", this.updateList.bind(this), true)
     }
-
-    //handleDeleteButtonClick(e) {
-        //e.preventDefault();
-    //    this.deleteList(e)
-   // }
 
     handleTextEventClick(e) {
         const li = e.target
@@ -99,16 +82,10 @@ class Events {
 
 
         this.adapter.updateEvent(newEventValue, id)
-        //e.target.remove();
-        //debugger
-        //this.adapter.updateEvent(e.target.value, id)
-        //this.refreshCallback()
         e.target.remove();
 
         replacementTarget.innerHTML = new Date(replacementValue).toLocaleString()
         console.log(e.target.value)
-
-        // somewhere in here, put the value of e.target.parentNode in a p tag, e.target.parentNode.firstChild, set innerhtml of firstChild to be the new date value
 
     }
 
@@ -126,30 +103,11 @@ class Events {
             })
         }
 
-    render() {
-        // const eventsContainer = document.getElementById('lists-container')   
+    render() {  
         const eventsOutput = document.createElement('div');
         this.events.forEach((myEvent) => {
             console.log(myEvent);
             eventsOutput.appendChild(new Event(myEvent, this.updateTextEvent.bind(this), this.updateTextEvent.bind(this), this.handleTextEventClick.bind(this), this.handleDateEventClick.bind(this)))
         })
-        return eventsOutput     
-        // eventsContainer.innerHTML = ""
-        //     this.events.forEach((list) => {
-        //         eventsContainer.appendChild(this.getEventElement(list))
-        //     })
-            //const deleteButton = document.querySelectorAll('button')
-            //console.log(deleteButton)
-            //deleteButton.forEach(btn => btn.addEventListener('click', (e) => {
-               // this.handleDeleteButtonClick(e)
-               // }))
-            //deleteButton.forEach((btn) => {btn.addEventListener("click", this.handleDeleteButtonClick.bind(this))})
-    
-            }
-
-    //getEventElement(event) {
-      //  const eventElement = event.renderEvent()
-        //eventElement.addEventListener("blur", this.updateEvent.bind(this), true)
-        //return eventElement
-    //}
+        return eventsOutput 
 }
