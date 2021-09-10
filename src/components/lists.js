@@ -8,7 +8,7 @@ class Lists {
 
     initBindingsAndEventListeners() {
         const listsContainer = document.getElementById('lists-container')
-        const names = document.querySelectorAll('li')        
+        const names = document.querySelectorAll('li')
         const newListName = document.getElementById('new-list-name')
         const listForm = document.getElementById('new-list-form')
         listForm.addEventListener('submit', this.createList.bind(this))
@@ -21,6 +21,7 @@ class Lists {
     }
 
     handleDeleteButtonClick(e) {
+        //e.preventDefault();
         this.deleteList(e)
     }
 
@@ -36,6 +37,7 @@ class Lists {
     }
 
     updateList(e) {
+        //debugger
         const li = e.target
         li.contentEditable = false
         li.classList.remove('editable')
@@ -64,9 +66,7 @@ class Lists {
 
     createEvent(e) {
         e.preventDefault()
-        //console.log(e)
         const newEventValue = e.target.parentNode
-        //console.log(newListValue.value)
         const value = newEventValue.value
         const id = newEventValue.dataset.id
         this.adapter.createEvent(id)
@@ -79,6 +79,7 @@ class Lists {
     }
 
     deleteList(e) {
+        //debugger
         e.stopPropagation()
         const li = e.target.parentNode
         console.log(li)
@@ -90,13 +91,14 @@ class Lists {
         .then(() => {
             this.fetchAndLoadLists()
         })
+        //this.render()
     }
 
     fetchAndLoadLists() {
         this.adapter
             .getLists()
             .then(lists => {
-                lists.sort((a, b) => a.id - b.id).forEach(list => this.lists.push(new List(list, this.triggerRefresh.bind(this))))
+                lists.sort((a, b) => a.id - b.id).forEach(list => this.lists.push(new List(list, this.triggerRefresh.bind)))
             })
             .then(() => {
                 this.render()
@@ -122,7 +124,6 @@ class Lists {
             deleteButton.forEach(btn => btn.addEventListener('click', (e) => {
                 this.handleDeleteButtonClick(e)
                 }))
-            //deleteButton.forEach((btn) => {btn.addEventListener("click", this.handleDeleteButtonClick.bind(this))})
             const addButton = document.querySelectorAll('.add-button')
             console.log(addButton)
             addButton.forEach(btn => btn.addEventListener('click', (e) => {
