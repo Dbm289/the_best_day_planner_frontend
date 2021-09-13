@@ -18,7 +18,7 @@ class List {
         const worldBtn = document.createElement("button")
         const eventGroup = document.createElement("div")
         //debugger
-        worldBtn.addEventListener("click", this.handleWorldButtonClick, true)
+        
         eventGroup.appendChild(new Events(this.events, updateListCallback))
         deleteBtn.innerHTML = "X";
         deleteBtn.className = "delete-button";
@@ -33,9 +33,33 @@ class List {
         lineDiv.appendChild(addBtn)
         lineDiv.appendChild(worldBtn)
         lineDiv.setAttribute('data-id', this.id)
+        worldBtn.addEventListener("click", (e) => { 
+            this.createWorldEvent(e)})
         
         return lineDiv
         //`<li data-id=${this.id}>${this.name}</li>`
+    }
+
+    handleWorldButtonClick(e) {
+        //debugger
+        this.createWorldEvent(e)
+    }
+
+    createWorldEvent(e) {
+        e.preventDefault()
+        
+        const adapter = new ListsAdapter
+        debugger
+        const worldEventValue = e.target.parentNode
+        const value = worldEventValue.value
+        const id = worldEventValue.dataset.id
+        adapter.createWorldEvent(id)
+        .then(() => {
+            this.lists = []
+        })
+        .then(() => {
+            fetchAndLoadLists()
+        })
     }
 
 }
