@@ -52,6 +52,7 @@ class Event {
 
         eventName.addEventListener("dblclick", this.handleTextFieldClick, true)
         eventDetail.addEventListener("dblclick", this.handleTextFieldClick, true)
+        eventName.addEventListener("submit", this.handleTextEventClick)
         eventName.addEventListener("blur", this.updateTextEvent, true)
         eventDetail.addEventListener("blur", this.updateTextEvent, true)
 

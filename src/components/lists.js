@@ -29,6 +29,10 @@ class Lists {
         this.createEvent(e)
     }
 
+    handleWorldButtonClick(e) {
+        this.createWorldEvent(e)
+    }
+
     toggleList(e) {
         const li = e.target
         li.contentEditable = true
@@ -75,6 +79,20 @@ class Lists {
         })
         .then(() => {
             this.fetchAndLoadLists()
+        })
+    }
+
+    createWorldEvent(e) {
+        e.preventDefault()
+        const worldEventValue = e.target.parentNode
+        const value = worldEventValue.value
+        const id = worldEventValue.dataset.id
+        this.adapter.createWorldEvent(id)
+        .then(() => {
+            this.lists = []
+        })
+        .then(() => {
+            fetchAndLoadLists()
         })
     }
 

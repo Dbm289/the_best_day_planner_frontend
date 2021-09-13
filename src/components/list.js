@@ -4,6 +4,7 @@ class List {
         this.name = listJSON.name
         this.events = listJSON.events
         this.refreshCallback = refreshCallback
+        //this.handleWorldButtonClick = handleWorldButtonClick
     }
 
     renderList(updateListCallback) {
@@ -14,17 +15,23 @@ class List {
         output.addEventListener("blur", updateListCallback, true)
         const addBtn = document.createElement("button")
         const deleteBtn = document.createElement("button")
+        const worldBtn = document.createElement("button")
         const eventGroup = document.createElement("div")
+        //debugger
+        worldBtn.addEventListener("click", this.handleWorldButtonClick, true)
         eventGroup.appendChild(new Events(this.events, updateListCallback))
         deleteBtn.innerHTML = "X";
         deleteBtn.className = "delete-button";
         addBtn.innerHTML = "Add Event";
         addBtn.className = "add-button";
+        worldBtn.innerHTML = "Try to take over the world!"
+        worldBtn.className = "world-button"
         output.innerHTML = (this.name)
         lineDiv.appendChild(output)
         lineDiv.appendChild(eventGroup)
         lineDiv.appendChild(deleteBtn)
         lineDiv.appendChild(addBtn)
+        lineDiv.appendChild(worldBtn)
         lineDiv.setAttribute('data-id', this.id)
         
         return lineDiv
