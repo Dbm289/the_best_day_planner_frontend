@@ -33,8 +33,8 @@ class List {
         lineDiv.appendChild(addBtn)
         lineDiv.appendChild(worldBtn)
         lineDiv.setAttribute('data-id', this.id)
-        worldBtn.addEventListener("click", (e) => { 
-            this.createWorldEvent(e)})
+        worldBtn.addEventListener("click", 
+            this.createWorldEvent.bind(this))
         
         return lineDiv
         //`<li data-id=${this.id}>${this.name}</li>`
@@ -49,7 +49,7 @@ class List {
         e.preventDefault()
         
         const adapter = new ListsAdapter
-        debugger
+        //debugger
         const worldEventValue = e.target.parentNode
         const value = worldEventValue.value
         const id = worldEventValue.dataset.id
@@ -58,8 +58,25 @@ class List {
             this.lists = []
         })
         .then(() => {
-            fetchAndLoadLists()
+            this.fetchAndLoadLists()
         })
     }
 
+    fetchAndLoadLists() {
+        const adapter = new ListsAdapter
+        adapter
+            .getLists()
+            .then(() => {
+                this.refreshCallback()
+            })
+            // .then(lists => {
+            //     lists.sort((a, b) => a.id - b.id).forEach(list => this.lists.push(new List(list, this.refreshCallback)))
+            // })
+            // .then(() => {
+            //     this.render()
+            // })
+            // .then(() => {
+            //     this.initBindingsAndEventListeners()
+            // })
+        }
 }

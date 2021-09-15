@@ -98,7 +98,7 @@ class Lists {
         this.adapter
             .getLists()
             .then(lists => {
-                lists.sort((a, b) => a.id - b.id).forEach(list => this.lists.push(new List(list, this.triggerRefresh.bind)))
+                lists.sort((a, b) => a.id - b.id).forEach(list => this.lists.push(new List(list, this.triggerRefresh.bind(this))))
             })
             .then(() => {
                 this.render()
