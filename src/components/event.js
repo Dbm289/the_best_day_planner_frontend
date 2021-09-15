@@ -1,5 +1,5 @@
 class Event {
-    constructor(eventJSON, updateTextEventCallback, updateDateEventCallback, handleTextFieldCallback, handleDateFieldCallback) {
+    constructor(eventJSON, updateTextEventCallback, updateDateEventCallback, handleTextFieldCallback, handleDateFieldCallback, refreshCallback) {
         this.id = eventJSON.id
         this.name = eventJSON.name
         this.detail = eventJSON.detail
@@ -11,6 +11,7 @@ class Event {
         this.updateDateEvent = updateDateEventCallback
         this.handleTextFieldClick = handleTextFieldCallback
         this.handleDateFieldClick = handleDateFieldCallback
+        this.refreshCallback = refreshCallback
 
         return this.render()
     }

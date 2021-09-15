@@ -93,7 +93,7 @@ class Events {
         this.adapter
             .getEvents()
             .then(events => {
-                events.sort((a, b) => a.id - b.id).forEach(event => this.events.push(new Event(event)))
+                events.sort((a, b) => a.id - b.id).forEach(event => this.events.push(new Event(event, this.refreshCallback)))
             })
             .then(() => {
                 this.render()
