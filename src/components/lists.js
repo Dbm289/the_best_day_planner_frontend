@@ -11,13 +11,19 @@ class Lists {
         const names = document.querySelectorAll('li')
         const newListName = document.getElementById('new-list-name')
         const listForm = document.getElementById('new-list-form')
+        const filterButton = document.getElementById('new-filter-button')
         listForm.addEventListener('submit', this.createList.bind(this))
         listsContainer.addEventListener('dblclick', this.handleListClick.bind(this))
+        filterButton.addEventListener('click', this.handleFilterClick.bind(this))
     }
 
     handleListClick(e) {
         this.toggleList(e)
         
+    }
+
+    handleFilterClick(e) {
+        this.filterList(e)
     }
 
     handleDeleteButtonClick(e) {
@@ -57,11 +63,22 @@ class Lists {
             newListValue.value = ''
         })
         .then(() => {
-            this.render()
+            this.render(this.lists)
         })
         .then(() => {
             this.initBindingsAndEventListeners()
         })
+    }
+
+    filterList(e) {
+        const filteredList = this.lists.filter(function(word) {
+            console.log(word)
+            return word.name[0] == 'S'
+        })
+        console.log(filteredList)
+        //return filteredList
+        this.render(filteredList)
+        
     }
 
     createEvent(e) {
@@ -101,7 +118,7 @@ class Lists {
                 lists.sort((a, b) => a.id - b.id).forEach(list => this.lists.push(new List(list, this.triggerRefresh.bind(this))))
             })
             .then(() => {
-                this.render()
+                this.render(this.lists)
             })
             .then(() => {
                 this.initBindingsAndEventListeners()
@@ -113,10 +130,10 @@ class Lists {
         this.fetchAndLoadLists()
     }
 
-    render() {
+    render(lists) {
         const listsContainer = document.getElementById('lists-container')            
         listsContainer.innerHTML = ""
-            this.lists.forEach((list) => {
+            lists.forEach((list) => {
                 listsContainer.appendChild(this.getListElement(list))
             })
             const deleteButton = document.querySelectorAll('.delete-button')
