@@ -89,20 +89,6 @@ class Events {
 
     }
 
-    fetchAndLoadEvents() {
-        this.adapter
-            .getEvents()
-            .then(events => {
-                events.sort((a, b) => a.id - b.id).forEach(event => this.events.push(new Event(event, this.refreshCallback)))
-            })
-            .then(() => {
-                this.render()
-            })
-            .then(() => {
-                this.initBindingsAndEventListeners()
-            })
-        }
-
     render() {
         // const eventsContainer = document.getElementById('lists-container')   
         const eventsOutput = document.createElement('div');

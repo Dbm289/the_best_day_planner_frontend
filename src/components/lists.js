@@ -3,6 +3,7 @@ class Lists {
         this.lists = []
         this.adapter = new ListsAdapter()
         this.fetchAndLoadLists()
+        //return this.render()
         
     }
 
