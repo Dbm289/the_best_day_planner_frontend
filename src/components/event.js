@@ -35,7 +35,7 @@ class Event {
 
         const startDateObject = new Date(this.event_start)
         const endDateObject = new Date(this.event_end)
-        console.log(eventStart, startDateObject)
+        //console.log(eventStart, startDateObject)
 
         eventName.innerHTML = this.name
         eventDetail.innerHTML = this.detail

@@ -9,7 +9,7 @@ class EventsAdapter {
     }
 
     updateEvent(value, id) {
-        console.log(value, id)
+        //console.log(value, id)
         return fetch(`${this.baseUrl}/${id}`, {
             method: 'PATCH',
             headers: {

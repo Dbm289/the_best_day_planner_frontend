@@ -53,11 +53,12 @@ class List {
         const value = worldEventValue.value
         const id = worldEventValue.dataset.id
         adapter.createWorldEvent(id)
-        .then(() => {
-            this.render(this.lists)
-        })
-        .then(() => {
-            this.initBindingsAndEventListeners()
+        .then((worldEvent) => {
+            const correctList = List.all.filter((list) => {
+                return list.id == worldEvent.list.id
+            })
+            correctList[0].events.push(worldEvent)
+            this.refreshCallback()
         })
         //.then(() => {
           //  this.lists = []
