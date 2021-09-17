@@ -1,4 +1,5 @@
 class Lists {
+    
     constructor() {
         this.lists = []
         this.adapter = new ListsAdapter()
@@ -16,6 +17,7 @@ class Lists {
         listsContainer.addEventListener('dblclick', this.toggleList.bind(this))
         filterButton.addEventListener('click', this.filterList.bind(this))
     }
+    
     toggleList(e) {
         const li = e.target
         li.contentEditable = true
@@ -40,7 +42,7 @@ class Lists {
         const value = newListValue.value
         this.adapter.createList(value).then(newList => {
             const renderReady = new List(newList)
-            this.lists.push(renderReady)
+            //this.lists.push(renderReady)
             newListValue.value = ''
         })
         .then(() => {
@@ -68,11 +70,18 @@ class Lists {
         const value = newEventValue.value
         const id = newEventValue.dataset.id
         this.adapter.createEvent(id)
-        .then(() => {
-            this.lists = []
+        .then((newEvent) => {
+            const correctList = List.all.filter((list) => {
+                console.log(list.id, newEvent.list.id)
+                return list.id == newEvent.list.id
+            })
+            //console.log(correctList)
+            correctList[0].events.push(newEvent)
+            this.render(this.lists)
         })
         .then(() => {
-            this.fetchAndLoadLists()
+            this.initBindingsAndEventListeners
+            //this.fetchAndLoadLists()
         })
     }
 
@@ -84,11 +93,15 @@ class Lists {
         const id = li.dataset.id
         this.adapter.destroyList(id)
         .then(() => {
-            this.lists = []
+            this.render(this.lists)
+            //this.lists = []
         })
         .then(() => {
-            this.fetchAndLoadLists()
+            this.initBindingsAndEventListeners()
         })
+        //.then(() => {
+          //  this.fetchAndLoadLists()
+        //})
         //this.render()
     }
 
@@ -111,10 +124,12 @@ class Lists {
         this.fetchAndLoadLists()
     }
 
-    render(lists) {
-        const listsContainer = document.getElementById('lists-container')            
+    render() {
+        const listsContainer = document.getElementById('lists-container') 
+        //console.log(List.all)           
         listsContainer.innerHTML = ""
-            lists.forEach((list) => {
+            List.all.forEach((list) => {
+                console.log(list)
                 listsContainer.appendChild(this.getListElement(list))
             })
             const deleteButton = document.querySelectorAll('.delete-button')
