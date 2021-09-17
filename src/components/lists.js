@@ -3,7 +3,6 @@ class Lists {
         this.lists = []
         this.adapter = new ListsAdapter()
         this.fetchAndLoadLists()
-        //return this.render()
         
     }
 
@@ -13,12 +12,10 @@ class Lists {
         const newListName = document.getElementById('new-list-name')
         const listForm = document.getElementById('new-list-form')
         const filterButton = document.getElementById('new-filter-button')
-        const all = this.lists
         listForm.addEventListener('submit', this.createList.bind(this))
         listsContainer.addEventListener('dblclick', this.toggleList.bind(this))
         filterButton.addEventListener('click', this.filterList.bind(this))
     }
-    
     toggleList(e) {
         const li = e.target
         li.contentEditable = true
@@ -114,11 +111,11 @@ class Lists {
         this.fetchAndLoadLists()
     }
 
-    render(all) {
+    render(lists) {
         const listsContainer = document.getElementById('lists-container')            
         listsContainer.innerHTML = ""
-            all.forEach((all) => {
-                listsContainer.appendChild(this.getListElement(all))
+            lists.forEach((list) => {
+                listsContainer.appendChild(this.getListElement(list))
             })
             const deleteButton = document.querySelectorAll('.delete-button')
             console.log(deleteButton)
