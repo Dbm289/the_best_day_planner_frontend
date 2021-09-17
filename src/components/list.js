@@ -8,7 +8,7 @@ class List {
         this.refreshCallback = refreshCallback
 
         List.all.push(this)
-        console.log(List.all)
+        //console.log(List.all)
     }
 
     renderList(updateListCallback) {
@@ -71,7 +71,7 @@ class List {
         // const eventsContainer = document.getElementById('lists-container')   
         const eventsOutput = document.createElement('div');
         this.events.forEach((myEvent) => {
-            console.log(myEvent);
+            //console.log(myEvent);
             eventsOutput.appendChild(new Event(myEvent, this.updateTextEvent.bind(this), this.updateTextEvent.bind(this), this.handleTextEventClick.bind(this), this.handleDateEventClick.bind(this)))
         })
         return eventsOutput

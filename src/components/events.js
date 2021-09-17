@@ -77,7 +77,7 @@ class Events {
 
         const replacementTarget = e.target.parentNode
         const replacementValue = e.target.value
-        console.log(replacementValue)
+        //console.log(replacementValue)
 
 
 
@@ -85,7 +85,7 @@ class Events {
         e.target.remove();
 
         replacementTarget.innerHTML = new Date(replacementValue).toLocaleString()
-        console.log(e.target.value)
+        //console.log(e.target.value)
 
     }
 
@@ -93,7 +93,7 @@ class Events {
         // const eventsContainer = document.getElementById('lists-container')   
         const eventsOutput = document.createElement('div');
         this.events.forEach((myEvent) => {
-            console.log(myEvent);
+            //console.log(myEvent);
             eventsOutput.appendChild(new Event(myEvent, this.updateTextEvent.bind(this), this.updateTextEvent.bind(this), this.handleTextEventClick.bind(this), this.handleDateEventClick.bind(this)))
         })
         return eventsOutput

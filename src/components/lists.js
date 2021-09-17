@@ -55,10 +55,10 @@ class Lists {
 
     filterList(e) {
         const filteredList = this.lists.filter(function(word) {
-            console.log(word)
+           // console.log(word)
             return word.name[0] == 'S'
         })
-        console.log(filteredList)
+       // console.log(filteredList)
         //return filteredList
         this.render(filteredList)
         
@@ -72,7 +72,7 @@ class Lists {
         this.adapter.createEvent(id)
         .then((newEvent) => {
             const correctList = List.all.filter((list) => {
-                console.log(list.id, newEvent.list.id)
+               // console.log(list.id, newEvent.list.id)
                 return list.id == newEvent.list.id
             })
             //console.log(correctList)
@@ -89,12 +89,16 @@ class Lists {
         //debugger
         e.stopPropagation()
         const li = e.target.parentNode
-        console.log(li)
+        //console.log(li)
         const id = li.dataset.id
         this.adapter.destroyList(id)
         .then(() => {
-            this.render(this.lists)
-            //this.lists = []
+            const correctList = List.all.filter((list) => {
+                return list.id != id
+            })
+            List.all = correctList
+            console.log(this.lists)
+            this.render()
         })
         .then(() => {
             this.initBindingsAndEventListeners()
@@ -129,16 +133,16 @@ class Lists {
         //console.log(List.all)           
         listsContainer.innerHTML = ""
             List.all.forEach((list) => {
-                console.log(list)
+               //console.log(list)
                 listsContainer.appendChild(this.getListElement(list))
             })
             const deleteButton = document.querySelectorAll('.delete-button')
-            console.log(deleteButton)
+            //console.log(deleteButton)
             deleteButton.forEach(btn => btn.addEventListener('click', (e) => {
                 this.deleteList(e)
                 }))
             const addButton = document.querySelectorAll('.add-button')
-            console.log(addButton)
+            //console.log(addButton)
             addButton.forEach(btn => btn.addEventListener('click', (e) => {
                 this.createEvent(e)
                 }))
