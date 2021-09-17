@@ -4,7 +4,6 @@ class List {
         this.name = listJSON.name
         this.events = listJSON.events
         this.refreshCallback = refreshCallback
-        //this.handleWorldButtonClick = handleWorldButtonClick
     }
 
     renderList(updateListCallback) {

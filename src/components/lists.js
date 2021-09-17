@@ -13,28 +13,10 @@ class Lists {
         const listForm = document.getElementById('new-list-form')
         const filterButton = document.getElementById('new-filter-button')
         listForm.addEventListener('submit', this.createList.bind(this))
-        listsContainer.addEventListener('dblclick', this.handleListClick.bind(this))
-        filterButton.addEventListener('click', this.handleFilterClick.bind(this))
+        listsContainer.addEventListener('dblclick', this.toggleList.bind(this))
+        filterButton.addEventListener('click', this.filterList.bind(this))
     }
-
-    handleListClick(e) {
-        this.toggleList(e)
-        
-    }
-
-    handleFilterClick(e) {
-        this.filterList(e)
-    }
-
-    handleDeleteButtonClick(e) {
-        //e.preventDefault();
-        this.deleteList(e)
-    }
-
-    handleAddButtonClick(e) {
-        this.createEvent(e)
-    }
-
+    
     toggleList(e) {
         const li = e.target
         li.contentEditable = true
@@ -139,12 +121,12 @@ class Lists {
             const deleteButton = document.querySelectorAll('.delete-button')
             console.log(deleteButton)
             deleteButton.forEach(btn => btn.addEventListener('click', (e) => {
-                this.handleDeleteButtonClick(e)
+                this.deleteList(e)
                 }))
             const addButton = document.querySelectorAll('.add-button')
             console.log(addButton)
             addButton.forEach(btn => btn.addEventListener('click', (e) => {
-                this.handleAddButtonClick(e)
+                this.createEvent(e)
                 }))
             return listsContainer
     
