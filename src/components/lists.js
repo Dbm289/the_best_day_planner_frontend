@@ -13,6 +13,7 @@ class Lists {
         const newListName = document.getElementById('new-list-name')
         const listForm = document.getElementById('new-list-form')
         const filterButton = document.getElementById('new-filter-button')
+        const all = this.lists
         listForm.addEventListener('submit', this.createList.bind(this))
         listsContainer.addEventListener('dblclick', this.toggleList.bind(this))
         filterButton.addEventListener('click', this.filterList.bind(this))
@@ -113,11 +114,11 @@ class Lists {
         this.fetchAndLoadLists()
     }
 
-    render(lists) {
+    render(all) {
         const listsContainer = document.getElementById('lists-container')            
         listsContainer.innerHTML = ""
-            lists.forEach((list) => {
-                listsContainer.appendChild(this.getListElement(list))
+            all.forEach((all) => {
+                listsContainer.appendChild(this.getListElement(all))
             })
             const deleteButton = document.querySelectorAll('.delete-button')
             console.log(deleteButton)
